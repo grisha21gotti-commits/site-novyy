@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru]
+     В каждом loc замените «[ЗАПОЛНИТЬ: боевой домен]» на https-адрес без слэша на конце.
+     Пример https://bvs68.ru в адреса не подставлен: домен ещё не подтверждён.
+     Главная указана один раз как «/», без отдельного /index.html. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен]/</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен]/uslugi.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен]/dokumenty.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен]/otrasli.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен]/kontakty.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен]/privacy.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен]/rayony/michurinsk.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен]/rayony/rasskazovo.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен]/rayony/morshansk.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен]/rayony/kotovsk.html</loc></url>
+</urlset>

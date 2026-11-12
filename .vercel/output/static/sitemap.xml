@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- [ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru] — подставьте боевой домен вместо текста плейсхолдера в каждом loc -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru]/</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru]/index.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru]/uslugi.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru]/dokumenty.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru]/otrasli.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru]/kontakty.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru]/privacy.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru]/rayony/michurinsk.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru]/rayony/rasskazovo.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru]/rayony/morshansk.html</loc></url>
+  <url><loc>[ЗАПОЛНИТЬ: боевой домен, например https://bvs68.ru]/rayony/kotovsk.html</loc></url>
+</urlset>
