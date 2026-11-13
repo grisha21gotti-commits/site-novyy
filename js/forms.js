@@ -39,7 +39,8 @@
       }).then(function (res) {
         return res.json().catch(function () { return {}; });
       }).then(function (answer) {
-        return { ok: !!(answer && answer.success === true), raw: answer };
+        var message = answer && answer.message ? String(answer.message) : "";
+        return { ok: !!(answer && answer.success === true), message: message };
       });
     }
   };
@@ -91,10 +92,10 @@
     return lines.join("\n");
   }
 
-  function channelStatus(kind, requestId) {
+  function channelStatus(kind, requestId, detail) {
     var id = requestId ? " Номер обращения: " + requestId + "." : "";
     if (kind === "sent") {
-      return "Заявка отправлена." + id + " Если письма нет во входящих, проверьте папку «Спам».";
+      return "Заявка отправлена." + id + " Письмо приходит на почту, которая указана в кабинете Web3Forms у этого ключа, а не на адрес с сайта. Проверьте «Спам» и вкладку «Промоакции».";
     }
     if (kind === "whatsapp") {
       return "Мы открыли WhatsApp со сводкой заявки. Если окно не появилось, позвоните " + PHONE_HUMAN + " или напишите на " + PUBLIC_EMAIL + ".";
@@ -102,7 +103,7 @@
     if (kind === "telegram") {
       return "Мы открыли Telegram со сводкой заявки. Если окно не появилось, позвоните " + PHONE_HUMAN + " или напишите на " + PUBLIC_EMAIL + ".";
     }
-    return "Письмо через сервис не ушло. Это не отправка. Мы открыли черновик на " + PUBLIC_EMAIL + ". Вложения к черновику нужно добавить вручную. Если окно не появилось, позвоните " + PHONE_HUMAN + ".";
+    return "Письмо не ушло: сервис не принял заявку." + (detail ? " " + detail : "") + " Это не отправка. Текст заявки сохранён ниже." + id;
   }
 
   function mailtoDraft(text) {
@@ -139,12 +140,10 @@
       requestId: data && data.requestId
     };
     return BVS_DELIVERY.send(payload).then(function (result) {
-      if (result && result.ok) return "sent";
-      mailtoDraft(text);
-      return "email";
+      if (result && result.ok) return { kind: "sent" };
+      return { kind: "failed", detail: result && result.message };
     }).catch(function () {
-      mailtoDraft(text);
-      return "email";
+      return { kind: "failed", detail: "Нет связи с сервисом отправки." };
     });
   }
 
@@ -229,11 +228,13 @@
       text = "Номер обращения: " + data.requestId + "\n" + text;
       var submit = form.querySelector('button[type="submit"]');
       if (submit) submit.disabled = true;
-      deliver(text, data).then(function (kind) {
+      deliver(text, data).then(function (result) {
+        var kind = result && result.kind ? result.kind : result;
+        var detail = result && result.detail;
         var status = form.querySelector("[data-form-status]");
         if (status) {
           status.hidden = false;
-          status.textContent = channelStatus(kind, data.requestId) + " Текст заявки показан ниже, его можно скопировать.";
+          status.textContent = channelStatus(kind, data.requestId, detail) + " Текст заявки показан ниже, его можно скопировать.";
         }
         var box = form.querySelector("[data-form-copy]");
         if (box) {

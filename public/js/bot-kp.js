@@ -110,14 +110,16 @@
         var text = api.buildMessage(state.data);
         send.disabled = true;
         send.textContent = "Отправляем…";
-        api.deliver(text, state.data).then(function (kind) {
+        api.deliver(text, state.data).then(function (result) {
+          var kind = result && result.kind ? result.kind : result;
+          var detail = result && result.detail;
           send.textContent = kind === "sent" ? "Заявка отправлена" : "Отправить запрос КП";
           send.disabled = false;
           var old = view.querySelector("[data-kp-result]");
           if (old) old.remove();
           var wrap = el("div", "");
           wrap.setAttribute("data-kp-result", "1");
-          wrap.appendChild(el("p", "form-status", api.channelStatus(kind)));
+          wrap.appendChild(el("p", "form-status", api.channelStatus(kind, state.data && state.data.requestId, detail)));
           var copy = document.createElement("textarea");
           copy.readOnly = true;
           copy.value = text;
