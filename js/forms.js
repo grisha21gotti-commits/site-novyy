@@ -21,21 +21,23 @@
     accessKey: "42427bbc-da4e-43b7-83f2-abf1b957878c",
     url: "https://api.web3forms.com/submit",
     send: function (payload) {
-      var body = {
-        access_key: this.accessKey,
-        subject: payload.subject,
-        from_name: payload.fromName,
-        name: payload.name,
-        email: payload.email,
-        message: payload.message,
-        botcheck: ""
-      };
-      if (payload.replyto) body.replyto = payload.replyto;
-      if (payload.requestId) body.request_id = payload.requestId;
+      var body = new FormData();
+      body.append("access_key", this.accessKey);
+      body.append("subject", payload.subject || "");
+      body.append("from_name", payload.fromName || "");
+      body.append("name", payload.name || "");
+      body.append("email", payload.email || "");
+      body.append("message", payload.message || "");
+      body.append("botcheck", "");
+      if (payload.replyto) body.append("replyto", payload.replyto);
+      if (payload.requestId) body.append("request_id", payload.requestId);
+      (payload.files || []).forEach(function (file) {
+        body.append("attachment", file, file.name);
+      });
       return fetch(this.url, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(body)
+        headers: { Accept: "application/json" },
+        body: body
       }).then(function (res) {
         return res.json().catch(function () { return {}; });
       }).then(function (answer) {
@@ -70,22 +72,76 @@
     return false;
   }
 
+  var SERVICE_LABELS = {
+    burenie: "Бурение артезианских скважин",
+    remont: "Ремонт и восстановление скважин",
+    vzu: "Водозаборный узел под ключ",
+    bashni: "Водонапорные башни",
+    nasosy: "Насосное оборудование и частотное регулирование",
+    voda: "Водоподготовка",
+    zso: "Санитарные зоны",
+    lic: "Лицензирование и проектная документация",
+    consult: "Нужна консультация"
+  };
+  var FILE_EXT = { pdf: 1, doc: 1, docx: 1, xls: 1, xlsx: 1, jpg: 1, jpeg: 1, png: 1, zip: 1 };
+  var FILE_MAX = 5 * 1024 * 1024;
+  var FILE_COUNT = 2;
+
+  function serviceLabel(value) {
+    return SERVICE_LABELS[value] || value || "—";
+  }
+
+  function stamp() {
+    try {
+      return new Intl.DateTimeFormat("ru-RU", {
+        timeZone: "Europe/Moscow",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      }).format(new Date()) + " (Москва)";
+    } catch (e) {
+      return new Date().toISOString();
+    }
+  }
+
+  function ensureId(form) {
+    if (!form.dataset.requestId) {
+      form.dataset.requestId = "BVS-" + Date.now().toString(36).toUpperCase();
+    }
+    return form.dataset.requestId;
+  }
+
   function buildMessage(data) {
     var lines = [
       "Запрос КП с сайта Бурводстрой",
+      "schema_version: 1",
+      "Номер обращения: " + (data.requestId || "—"),
+      "Дата и время: " + (data.createdAt || "—"),
+      "Источник: " + (data.source || "—"),
       "",
       "Организация: " + (data.org || "—"),
       "ИНН: " + (data.inn || "—"),
-      "Населённый пункт / объект: " + (data.place || "—"),
-      "Тип объекта: " + (data.objectType || "—"),
-      "Нужный объём воды, м³/сутки: " + (data.volume || "—"),
-      "Назначение воды: " + (data.purpose || "—"),
-      "Желаемые сроки: " + (data.timing || "—"),
-      "Какие документы уже есть: " + (data.docs || "—"),
       "Контактное лицо: " + (data.contact || "—"),
       "Телефон: " + (data.phone || "—"),
       "Email: " + (data.email || "—"),
+      "Место объекта: " + (data.place || "—"),
+      "Услуга: " + serviceLabel(data.service),
+      "Тип объекта: " + (data.objectType || "—"),
+      "Нужный объём воды, м³/сутки: " + (data.volume || "—"),
+      "Назначение воды: " + (data.purpose || "—"),
+      "Проект и геология: " + (data.geology || "—"),
+      "Анализ воды: " + (data.analysis || "—"),
+      "Требования к результату: " + (data.resultNeed || "—"),
+      "Известные параметры: " + (data.known || "—"),
+      "Неисправность: " + (data.fault || "—"),
+      "Состав работ: " + (data.scope || "—"),
+      "Желаемые сроки: " + (data.timing || "—"),
+      "Какие документы уже есть: " + (data.docs || "—"),
       "Задача / ТЗ: " + (data.task || "—"),
+      "Вложения: " + ((data.fileNames && data.fileNames.length) ? data.fileNames.join(", ") : "нет"),
       "",
       "Согласие с политикой конфиденциальности: да"
     ];
@@ -137,7 +193,8 @@
       email: visitorEmail || PUBLIC_EMAIL,
       replyto: visitorEmail || "",
       message: text,
-      requestId: data && data.requestId
+      requestId: data && data.requestId,
+      files: data && data.files
     };
     return BVS_DELIVERY.send(payload).then(function (result) {
       if (result && result.ok) return { kind: "sent" };
@@ -166,8 +223,13 @@
 
   function readForm(form) {
     function val(name) {
-      var el = form.querySelector('[name="' + name + '"]');
-      return el ? String(el.value || "").trim() : "";
+      var nodes = form.querySelectorAll('[name="' + name + '"]');
+      for (var i = 0; i < nodes.length; i++) {
+        var extra = nodes[i].closest("[data-extra]");
+        if (extra && extra.hidden) continue;
+        return String(nodes[i].value || "").trim();
+      }
+      return "";
     }
     var consent = form.querySelector('[name="consent"]');
     return {
@@ -183,8 +245,44 @@
       timing: val("timing"),
       docs: val("docs"),
       task: val("task"),
-      consent: !!(consent && consent.checked)
+      service: val("service"),
+      geology: val("geology"),
+      analysis: val("analysis"),
+      resultNeed: val("resultNeed"),
+      known: val("known"),
+      fault: val("fault"),
+      scope: val("scope"),
+      consent: !!(consent && consent.checked),
+      requestId: form.dataset.requestId || "",
+      createdAt: stamp(),
+      source: (location.pathname || "/") + " / форма"
     };
+  }
+
+  function selectedFiles(form) {
+    var input = form.querySelector('input[name="files"]');
+    if (!input || !input.files) return [];
+    return Array.prototype.slice.call(input.files);
+  }
+
+  function fileProblem(files) {
+    if (files.length > FILE_COUNT) return "Можно приложить не больше " + FILE_COUNT + " файлов.";
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      var ext = String(file.name || "").split(".").pop().toLowerCase();
+      if (!FILE_EXT[ext]) return "Файл «" + file.name + "» не подходит. Нужны PDF, DOC, DOCX, XLS, XLSX, JPG, PNG или ZIP.";
+      if (file.size > FILE_MAX) return "Файл «" + file.name + "» больше 5 МБ.";
+    }
+    return "";
+  }
+
+  function syncExtra(form) {
+    var service = "";
+    var select = form.querySelector('[name="service"]');
+    if (select) service = select.value;
+    form.querySelectorAll("[data-extra]").forEach(function (node) {
+      node.hidden = node.getAttribute("data-extra") !== service;
+    });
   }
 
   function validate(form, data) {
@@ -195,17 +293,25 @@
         first = form.querySelector('[name="' + name + '"]');
       }
     }
-    ["org", "inn", "contact", "phone", "email", "consent"].forEach(function (name) {
+    ["org", "inn", "contact", "phone", "email", "place", "service", "task", "files", "consent"].forEach(function (name) {
       setError(form, name, "");
     });
     if (!data.org) bad("org", "Укажите организацию.");
     if (data.inn && !/^\d{10}(\d{2})?$/.test(data.inn)) bad("inn", "ИНН — 10 или 12 цифр, либо оставьте поле пустым.");
     if (!data.contact) bad("contact", "Укажите контактное лицо.");
+    if (!data.place) bad("place", "Укажите место объекта.");
+    if (!data.service) bad("service", "Выберите услугу или пункт «Нужна консультация».");
     var hasPhone = phoneOk(data.phone);
     var hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || "");
     if (data.phone && !hasPhone) bad("phone", "Введите телефон: 10 или 11 цифр.");
     if (data.email && !hasEmail) bad("email", "Проверьте написание почты.");
     if (!hasPhone && !hasEmail) bad("email", "Укажите телефон или email — хотя бы одно.");
+    var files = selectedFiles(form);
+    var fileError = fileProblem(files);
+    if (fileError) bad("files", fileError);
+    if (!data.task && !files.length) bad("task", "Опишите задачу или приложите файл ТЗ. Готовое ТЗ заново переписывать не нужно.");
+    var trap = form.querySelector('[name="botcheck"]');
+    if (trap && String(trap.value || "").trim()) bad("consent", "Заявка не отправлена.");
     if (!data.consent) bad("consent", "Нужно согласие с политикой конфиденциальности.");
     if (first && typeof first.focus === "function") first.focus();
     return !first;
@@ -218,14 +324,30 @@
         phone.value = formatPhone(phone.value);
       });
     }
+    var service = form.querySelector('[name="service"]');
+    if (service) {
+      if (!service.value && document.body.dataset.service) service.value = document.body.dataset.service;
+      service.addEventListener("change", function () { syncExtra(form); });
+      syncExtra(form);
+    }
     form.addEventListener("submit", function (event) {
       event.preventDefault();
       var data = readForm(form);
-      if (!data.requestId) data.requestId = "BVS-" + Date.now().toString(36).toUpperCase();
-      form.dataset.requestId = data.requestId;
+      data.requestId = ensureId(form);
+      data.files = selectedFiles(form);
+      data.fileNames = data.files.map(function (file) { return file.name; });
       if (!validate(form, data)) return;
+      var sentAt = 0;
+      try { sentAt = Number(sessionStorage.getItem("bvs-sent-at") || 0); } catch (e) {}
+      if (sentAt && Date.now() - sentAt < 20000) {
+        var early = form.querySelector("[data-form-status]");
+        if (early) {
+          early.hidden = false;
+          early.textContent = "Подождите немного перед новой заявкой. Повтор этой же заявки можно отправить после паузы, номер сохранится.";
+        }
+        return;
+      }
       var text = buildMessage(data);
-      text = "Номер обращения: " + data.requestId + "\n" + text;
       var submit = form.querySelector('button[type="submit"]');
       if (submit) submit.disabled = true;
       deliver(text, data).then(function (result) {
@@ -241,6 +363,10 @@
           box.hidden = false;
           if (box.parentElement) box.parentElement.hidden = false;
           box.value = text;
+        }
+        if (kind === "sent") {
+          try { sessionStorage.setItem("bvs-sent-at", String(Date.now())); } catch (e) {}
+          delete form.dataset.requestId;
         }
         if (submit) submit.disabled = false;
       });

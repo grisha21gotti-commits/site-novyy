@@ -46,8 +46,23 @@
       <span class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Меню</span>
     </button>
     <nav id="site-nav" class="nav" data-nav aria-label="Разделы сайта">
-      <a href="uslugi.html">Услуги</a>
+            <div class="nav-drop" data-drop>
+        <button type="button" class="nav-drop-btn" data-drop-btn aria-expanded="false">Услуги</button>
+        <div class="nav-drop-panel">
+          <a href="uslugi.html">Все услуги</a>
+          <a href="uslugi/burenie.html">Бурение скважин</a>
+          <a href="uslugi/remont.html">Ремонт скважин</a>
+          <a href="uslugi/vzu.html">Узел под ключ</a>
+          <a href="uslugi/bashni.html">Башни</a>
+          <a href="uslugi/nasosy.html">Насосы</a>
+          <a href="uslugi/voda.html">Водоподготовка</a>
+          <a href="uslugi/zso.html">Санитарные зоны</a>
+          <a href="uslugi/lic.html">Лицензирование</a>
+        </div>
+      </div>
       <a href="otrasli.html">Отрасли</a>
+      <a href="tehnika.html">Техника</a>
+      <a href="obekty.html">Объекты</a>
       <a href="dokumenty.html" aria-current="page">Документы</a>
       <div class="nav-drop" data-drop>
         <button type="button" class="nav-drop-btn" data-drop-btn aria-expanded="false">Районы</button>
@@ -88,7 +103,7 @@
     <article class="card"><h2>Документальная гарантия</h2><p>Даём документальную гарантию. Срок: [ПОДТВЕРДИТЬ: на старом сайте указан 1 год]</p></article>
     <article class="card"><h2>Сканы</h2><p>Здесь можно разместить свидетельства и лицензию, когда будут файлы. [ЗАПОЛНИТЬ: сканы документов] Печати и сертификаты не изображаем.</p></article>
   </div></section>
-  <section class="section section-muted" id="kp"><div class="container"><h2>Отправить ТЗ и запросить КП</h2><div class="form-card"><form class="kp-form js-kp-form" action="mailto:bvs_tam@mail.ru" method="post" enctype="text/plain" novalidate>
+  <section class="section section-muted" id="kp"><div class="container"><h2>Отправить ТЗ и запросить КП</h2><div class="form-card"><form class="kp-form js-kp-form" action="mailto:bvs_tam@mail.ru" method="post" enctype="multipart/form-data" novalidate>
     <div class="form-grid two">
       <label>Организация *
         <input name="org" required autocomplete="organization" maxlength="200">
@@ -110,42 +125,121 @@
         <input name="email" type="email" autocomplete="email" maxlength="120">
         <span class="field-error" data-error-for="email"></span>
       </label>
-      <label>Населённый пункт / объект
-        <input name="place" value="" maxlength="160">
+      <label>Место объекта *
+        <input name="place" required maxlength="160" value="">
+        <span class="field-error" data-error-for="place"></span>
       </label>
       <label>Тип объекта
         <select name="objectType">
-          <option value="">Выберите</option>
+          <option value="">Не знаю</option>
           <option>ферма</option>
           <option>агрохолдинг</option>
           <option>промышленность</option>
           <option>муниципалитет</option>
+          <option>подрядчик</option>
+          <option>проектировщик</option>
           <option>другое</option>
         </select>
       </label>
-      <label>Нужный объём воды, м³/сутки
-        <input name="volume" maxlength="80">
-      </label>
-      <label>Назначение
-        <select name="purpose">
-          <option value="">Пока не знаем</option>
-          <option>питьевое</option>
-          <option>технологическое</option>
-          <option>смешанное</option>
-          <option>пока не знаем</option>
+      <label>Услуга *
+        <select name="service">
+          <option value="">Выберите</option>
+          <option value="burenie">Бурение артезианских скважин</option>
+          <option value="remont">Ремонт и восстановление скважин</option>
+          <option value="vzu">Водозаборный узел под ключ</option>
+          <option value="bashni">Водонапорные башни</option>
+          <option value="nasosy">Насосное оборудование и частотное регулирование</option>
+          <option value="voda">Водоподготовка</option>
+          <option value="zso">Санитарные зоны</option>
+          <option value="lic">Лицензирование и проектная документация</option>
+          <option value="consult">Нужна консультация</option>
         </select>
+        <span class="field-error" data-error-for="service"></span>
       </label>
+      <div class="form-extra" data-extra="burenie" hidden>
+        <label>Назначение воды
+          <select name="purpose">
+            <option value="">Не знаю</option>
+            <option>питьевое</option>
+            <option>технологическое</option>
+            <option>смешанное</option>
+            <option>не знаю</option>
+          </select>
+        </label>
+        <label>Нужная производительность, м³/сутки
+          <input name="volume" maxlength="80" placeholder="можно указать «не знаю»">
+        </label>
+        <label>Проект и геологические данные
+          <input name="geology" maxlength="240" placeholder="нет / есть проект / есть геология / не знаю">
+        </label>
+      </div>
+      <div class="form-extra" data-extra="voda" hidden>
+        <label>Анализ воды
+          <input name="analysis" maxlength="240" placeholder="нет / приложу файл / не знаю">
+        </label>
+        <label>Расход
+          <input name="volume" maxlength="80" placeholder="можно указать «не знаю»">
+        </label>
+        <label>Какой результат нужен
+          <input name="resultNeed" maxlength="240" placeholder="не знаю">
+        </label>
+      </div>
+      <div class="form-extra" data-extra="remont" hidden>
+        <label>Что уже известно о скважине
+          <input name="known" maxlength="240" placeholder="глубина, год, паспорт — или «не знаю»">
+        </label>
+        <label>Что неисправно
+          <input name="fault" maxlength="240" placeholder="не знаю">
+        </label>
+      </div>
+      <div class="form-extra" data-extra="vzu" hidden>
+        <label>Состав работ и документы
+          <input name="scope" maxlength="240" placeholder="не знаю">
+        </label>
+      </div>
+      <div class="form-extra" data-extra="bashni" hidden>
+        <label>Состав работ и документы
+          <input name="scope" maxlength="240" placeholder="не знаю">
+        </label>
+      </div>
+      <div class="form-extra" data-extra="nasosy" hidden>
+        <label>Состав работ и документы
+          <input name="scope" maxlength="240" placeholder="не знаю">
+        </label>
+      </div>
+      <div class="form-extra" data-extra="zso" hidden>
+        <label>Состав работ и документы
+          <input name="scope" maxlength="240" placeholder="не знаю">
+        </label>
+      </div>
+      <div class="form-extra" data-extra="lic" hidden>
+        <label>Состав работ и документы
+          <input name="scope" maxlength="240" placeholder="не знаю">
+        </label>
+      </div>
+      <div class="form-extra" data-extra="consult" hidden>
+        <label>Состав работ и документы
+          <input name="scope" maxlength="240" placeholder="не знаю">
+        </label>
+      </div>
       <label>Желаемые сроки
-        <input name="timing" maxlength="160">
+        <input name="timing" maxlength="160" placeholder="не знаю">
       </label>
     </div>
     <div class="form-grid">
       <label>Какие документы уже есть
         <input name="docs" maxlength="240" placeholder="ничего / проект / лицензия / паспорт / другое">
       </label>
-      <label>Кратко о задаче, можно вставить ТЗ
-        <textarea name="task" maxlength="4000"></textarea>
+      <label>Кратко о задаче
+        <textarea name="task" maxlength="4000" placeholder="Если ТЗ приложено файлом, заново его не переписывайте"></textarea>
+        <span class="field-error" data-error-for="task"></span>
       </label>
+      <label>Файл ТЗ, проект или анализ воды
+        <input name="files" type="file" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.zip,application/pdf">
+        <span class="field-error" data-error-for="files"></span>
+      </label>
+      <p class="fine">PDF, DOC, DOCX, XLS, XLSX, JPG, PNG или ZIP. Не больше 2 файлов, каждый до 5 МБ. Неподходящий тип и слишком большой файл отклоняются до отправки. Проверку на стороне сервиса приёма это не заменяет.</p>
+      <label class="hp">Не заполняйте это поле<input name="botcheck" tabindex="-1" autocomplete="off"></label>
       <label class="check-row">
         <input type="checkbox" name="consent" required>
         <span>Согласен на обработку данных в соответствии с <a href="privacy.html">политикой конфиденциальности</a>.</span>
@@ -155,7 +249,7 @@
         <button class="btn btn-primary" type="submit">Отправить ТЗ и запросить КП</button>
         <!-- P3: кнопка бота скрыта. <button class="btn btn-ghost js-open-kp" type="button">Заполнить заявку с помощью бота</button> -->
       </div>
-      <p class="fine">Заявка уходит письмом через сервис Web3Forms. Адрес приёма на сайте не показывается. На сервере сайта она не хранится. WhatsApp: [ЗАПОЛНИТЬ: номер WhatsApp в формате 7XXXXXXXXXX]. Telegram: [ЗАПОЛНИТЬ: аккаунт или номер Telegram]. Калькулятора и цены за метр нет.</p>
+      <p class="fine">Заявка уходит письмом через сервис Web3Forms. Адрес приёма на сайте не показывается. На сервере сайта она не хранится. Калькулятора и цены за метр нет.</p>
       <div class="form-status" data-form-status hidden></div>
       <label data-form-copy-wrap hidden>Текст заявки
         <textarea data-form-copy readonly></textarea>
@@ -176,6 +270,8 @@
       <p class="footer-title">Разделы</p>
       <ul class="footer-links">
         <li><a href="uslugi.html">Услуги</a></li>
+        <li><a href="tehnika.html">Техника</a></li>
+        <li><a href="obekty.html">Объекты</a></li>
         <li><a href="otrasli.html">Отрасли</a></li>
         <li><a href="dokumenty.html">Документы</a></li>
         <li><a href="kontakty.html">Контакты</a></li>

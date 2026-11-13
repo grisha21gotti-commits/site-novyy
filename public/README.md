@@ -1,0 +1,390 @@
+# сайт новый
+
+Публичный код сайта ООО «БУРВОДСТРОЙ»: [github.com/grisha21gotti-commits/site-novyy](https://github.com/grisha21gotti-commits/site-novyy). Название — **сайт новый**. В адресе GitHub пробел и кириллица не проходят, поэтому папка репозитория называется `site-novyy`. На самих страницах название компании не менялось.
+
+Репозиторий открыт, чтобы ссылку можно было отправить другому человеку. Править файлы по-прежнему можно: публичность только даёт читать код, она не забирает право менять его у владельца.
+
+Живой сайт для заказчиков — это HTML в корне. Оболочка в `src/` нужна превью конструктора и к текстам компании не относится.
+
+## Как посмотреть локально
+
+```bash
+npm install
+npm run dev
+```
+
+Сайт открывается на порту 8080. Заявки КП уходят через Web3Forms из браузера посетителя. Пароля от почты в проекте нет. Ключ формы публичный: им можно только отправить заявку.
+
+Куда править тексты, телефон, ключ формы, Метрику и будущий домен — в [ИНСТРУКЦИЯ.md](ИНСТРУКЦИЯ.md).
+
+## Какие файлы трогать
+
+| Задача | Файл |
+| --- | --- |
+| Тексты страниц | `content/*.js` и тот же текст в соответствующем `.html` |
+| Телефоны, почта в подвале, адрес | `content/company.js` |
+| Ответы консультанта | `data/knowledge-base.js` |
+| Заявка КП и ключ формы | `js/forms.js` |
+| Шаги бота КП | `js/bot-kp.js` |
+| Внешний вид | `css/styles.css` |
+| Страницы услуг P1 | `uslugi/*.html`, плюс `tehnika.html` и `obekty.html` |
+| Логотип | `img/logo.png` |
+
+`public/` и `.vercel/output/static/` — копии. Их не редактируют: сборка перезаписывает их из корня.
+
+## Каждый файл
+
+
+- `.gitignore` — Список файлов, которые Git не сохраняет: node_modules, секреты .env, служебные id проекта.
+- `.grok/app-env.json` — Флаги оболочки Grok: авторизация выключена, отдельная база для выкладки не нужна.
+- `.grok/preview.log` — Журнал прошлого запуска превью. На страницы сайта не влияет.
+- `.grok/references/browser-qa.md` — Памятка конструктора, как проверять сайт в браузере.
+- `.grok/references/data-and-auth.md` — Памятка конструктора про данные и вход. Сайт компании вход не использует.
+- `.grok/references/deploy-target.md` — Памятка конструктора, куда собирается проект.
+- `.grok/references/generated-art.md` — Памятка конструктора про картинки. Логотип компании здесь не рисуется.
+- `.grok/references/hibernate-revive.md` — Памятка конструктора, как останавливать и снова поднимать превью.
+- `.grok/references/scaffold.md` — Памятка конструктора про каркас приложения вокруг статического сайта.
+- `.grok/skills/auth/SKILL.md` — Не относится к сайту компании. Памятка конструктора про вход: `auth/SKILL.md`.
+- `.grok/skills/auth/references/grok-identity.md` — Не относится к сайту компании. Памятка конструктора про вход: `auth/references/grok-identity.md`.
+- `.grok/skills/auth/references/per-user-data.md` — Не относится к сайту компании. Памятка конструктора про вход: `auth/references/per-user-data.md`.
+- `.grok/skills/auth/references/prewired-and-env.md` — Не относится к сайту компании. Памятка конструктора про вход: `auth/references/prewired-and-env.md`.
+- `.grok/skills/auth/references/session-ui.md` — Не относится к сайту компании. Памятка конструктора про вход: `auth/references/session-ui.md`.
+- `.grok/skills/auth/references/sign-in-methods.md` — Не относится к сайту компании. Памятка конструктора про вход: `auth/references/sign-in-methods.md`.
+- `.grok/skills/auth/references/wiring.md` — Не относится к сайту компании. Памятка конструктора про вход: `auth/references/wiring.md`.
+- `.grok/skills/building-games/SKILL.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/SKILL.md`.
+- `.grok/skills/building-games/references/3d-libs.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/3d-libs.md`.
+- `.grok/skills/building-games/references/ai-pathfinding.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/ai-pathfinding.md`.
+- `.grok/skills/building-games/references/audio.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/audio.md`.
+- `.grok/skills/building-games/references/babylon.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/babylon.md`.
+- `.grok/skills/building-games/references/collision-physics.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/collision-physics.md`.
+- `.grok/skills/building-games/references/ecs-architecture.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/ecs-architecture.md`.
+- `.grok/skills/building-games/references/game-feel-juice.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/game-feel-juice.md`.
+- `.grok/skills/building-games/references/genres/board-card-chess.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/genres/board-card-chess.md`.
+- `.grok/skills/building-games/references/genres/endless-runner.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/genres/endless-runner.md`.
+- `.grok/skills/building-games/references/genres/fps.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/genres/fps.md`.
+- `.grok/skills/building-games/references/genres/platformer-2d.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/genres/platformer-2d.md`.
+- `.grok/skills/building-games/references/genres/puzzle-match3-tetris.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/genres/puzzle-match3-tetris.md`.
+- `.grok/skills/building-games/references/genres/racing-kart.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/genres/racing-kart.md`.
+- `.grok/skills/building-games/references/genres/topdown-twin-stick.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/genres/topdown-twin-stick.md`.
+- `.grok/skills/building-games/references/genres/tower-defense.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/genres/tower-defense.md`.
+- `.grok/skills/building-games/references/genres/voxel-minecraft.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/genres/voxel-minecraft.md`.
+- `.grok/skills/building-games/references/input.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/input.md`.
+- `.grok/skills/building-games/references/phaser.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/phaser.md`.
+- `.grok/skills/building-games/references/procedural-generation.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/procedural-generation.md`.
+- `.grok/skills/building-games/references/save-persistence.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/save-persistence.md`.
+- `.grok/skills/building-games/references/threejs-foundational.md` — Не относится к сайту компании. Памятка конструктора про игры: `building-games/references/threejs-foundational.md`.
+- `.grok/skills/controls/SKILL.md` — Не относится к сайту компании. Памятка конструктора про управление: `controls/SKILL.md`.
+- `.grok/skills/design-ui/SKILL.md` — Не относится к сайту компании. Памятка конструктора про интерфейс: `design-ui/SKILL.md`.
+- `.grok/skills/design-ui/references/animations.md` — Не относится к сайту компании. Памятка конструктора про интерфейс: `design-ui/references/animations.md`.
+- `.grok/skills/design-ui/references/performance.md` — Не относится к сайту компании. Памятка конструктора про интерфейс: `design-ui/references/performance.md`.
+- `.grok/skills/design-ui/references/refined-ui.md` — Не относится к сайту компании. Памятка конструктора про интерфейс: `design-ui/references/refined-ui.md`.
+- `.grok/skills/design-ui/references/surfaces.md` — Не относится к сайту компании. Памятка конструктора про интерфейс: `design-ui/references/surfaces.md`.
+- `.grok/skills/design-ui/references/typography.md` — Не относится к сайту компании. Памятка конструктора про интерфейс: `design-ui/references/typography.md`.
+- `.grok/skills/game-animation-frames/SKILL.md` — Не относится к сайту компании. Памятка конструктора про кадры анимации: `game-animation-frames/SKILL.md`.
+- `.grok/skills/game-asset-core/SKILL.md` — Не относится к сайту компании. Памятка конструктора про игровые ассеты: `game-asset-core/SKILL.md`.
+- `.grok/skills/game-character-consistency/SKILL.md` — Не относится к сайту компании. Памятка конструктора про одного и того же персонажа: `game-character-consistency/SKILL.md`.
+- `.grok/skills/game-tilesets/SKILL.md` — Не относится к сайту компании. Памятка конструктора про тайлы: `game-tilesets/SKILL.md`.
+- `.grok/skills/game-ui-icons/SKILL.md` — Не относится к сайту компании. Памятка конструктора про игровые иконки: `game-ui-icons/SKILL.md`.
+- `.grok/skills/generate2dmap/LICENSE` — Не относится к сайту компании. Памятка конструктора про плоские карты: `generate2dmap/LICENSE`.
+- `.grok/skills/generate2dmap/SKILL.md` — Не относится к сайту компании. Памятка конструктора про плоские карты: `generate2dmap/SKILL.md`.
+- `.grok/skills/generate2dmap/SOURCE.md` — Не относится к сайту компании. Памятка конструктора про плоские карты: `generate2dmap/SOURCE.md`.
+- `.grok/skills/generate2dmap/references/deliverables.md` — Не относится к сайту компании. Памятка конструктора про плоские карты: `generate2dmap/references/deliverables.md`.
+- `.grok/skills/generate2dmap/references/layered-map-contract.md` — Не относится к сайту компании. Памятка конструктора про плоские карты: `generate2dmap/references/layered-map-contract.md`.
+- `.grok/skills/generate2dmap/references/map-strategies.md` — Не относится к сайту компании. Памятка конструктора про плоские карты: `generate2dmap/references/map-strategies.md`.
+- `.grok/skills/generate2dmap/references/object-production-gate.md` — Не относится к сайту компании. Памятка конструктора про плоские карты: `generate2dmap/references/object-production-gate.md`.
+- `.grok/skills/generate2dmap/references/pipeline.md` — Не относится к сайту компании. Памятка конструктора про плоские карты: `generate2dmap/references/pipeline.md`.
+- `.grok/skills/generate2dmap/references/prop-pack-contract.md` — Не относится к сайту компании. Памятка конструктора про плоские карты: `generate2dmap/references/prop-pack-contract.md`.
+- `.grok/skills/generate2dmap/references/side-scroll-stages.md` — Не относится к сайту компании. Памятка конструктора про плоские карты: `generate2dmap/references/side-scroll-stages.md`.
+- `.grok/skills/generate2dmap/scripts/compose_layered_preview.py` — Не относится к сайту компании. Памятка конструктора про плоские карты: `generate2dmap/scripts/compose_layered_preview.py`.
+- `.grok/skills/generate2dmap/scripts/extract_prop_pack.py` — Не относится к сайту компании. Памятка конструктора про плоские карты: `generate2dmap/scripts/extract_prop_pack.py`.
+- `.grok/skills/generate2dsprite/LICENSE` — Не относится к сайту компании. Памятка конструктора про плоских персонажей: `generate2dsprite/LICENSE`.
+- `.grok/skills/generate2dsprite/SKILL.md` — Не относится к сайту компании. Памятка конструктора про плоских персонажей: `generate2dsprite/SKILL.md`.
+- `.grok/skills/generate2dsprite/SOURCE.md` — Не относится к сайту компании. Памятка конструктора про плоских персонажей: `generate2dsprite/SOURCE.md`.
+- `.grok/skills/generate2dsprite/references/modes.md` — Не относится к сайту компании. Памятка конструктора про плоских персонажей: `generate2dsprite/references/modes.md`.
+- `.grok/skills/generate2dsprite/references/prompt-rules.md` — Не относится к сайту компании. Памятка конструктора про плоских персонажей: `generate2dsprite/references/prompt-rules.md`.
+- `.grok/skills/generate2dsprite/scripts/generate2dsprite.py` — Не относится к сайту компании. Памятка конструктора про плоских персонажей: `generate2dsprite/scripts/generate2dsprite.py`.
+- `.grok/skills/generate2dsprite/scripts/make_layout_guide.py` — Не относится к сайту компании. Памятка конструктора про плоских персонажей: `generate2dsprite/scripts/make_layout_guide.py`.
+- `.grok/skills/imagine-grok-build/SKILL.md` — Не относится к сайту компании. Памятка конструктора про генерацию картинок: `imagine-grok-build/SKILL.md`.
+- `.grok/skills/multiplayer-p2p/SKILL.md` — Не относится к сайту компании. Памятка конструктора про сетевую игру: `multiplayer-p2p/SKILL.md`.
+- `.grok/skills/multiplayer-p2p/references/react-binding.md` — Не относится к сайту компании. Памятка конструктора про сетевую игру: `multiplayer-p2p/references/react-binding.md`.
+- `.grok/skills/multiplayer-p2p/references/signaling-relay.md` — Не относится к сайту компании. Памятка конструктора про сетевую игру: `multiplayer-p2p/references/signaling-relay.md`.
+- `.grok/skills/neon/SKILL.md` — Не относится к сайту компании. Памятка конструктора про базу neon: `neon/SKILL.md`.
+- `.grok/skills/og/SKILL.md` — Не относится к сайту компании. Памятка конструктора про картинку ссылки: `og/SKILL.md`.
+- `.grok/skills/og/references/brand-pass.md` — Не относится к сайту компании. Памятка конструктора про картинку ссылки: `og/references/brand-pass.md`.
+- `.grok/skills/og/references/custom-card.md` — Не относится к сайту компании. Памятка конструктора про картинку ссылки: `og/references/custom-card.md`.
+- `.grok/skills/og/references/favicon-and-icons.md` — Не относится к сайту компании. Памятка конструктора про картинку ссылки: `og/references/favicon-and-icons.md`.
+- `.grok/skills/og/references/og-type-contract.md` — Не относится к сайту компании. Памятка конструктора про картинку ссылки: `og/references/og-type-contract.md`.
+- `.grok/skills/og/references/placeholder-card.md` — Не относится к сайту компании. Памятка конструктора про картинку ссылки: `og/references/placeholder-card.md`.
+- `.grok/skills/og/references/x-banner.md` — Не относится к сайту компании. Памятка конструктора про картинку ссылки: `og/references/x-banner.md`.
+- `.grok/skills/threejs/SKILL.md` — Не относится к сайту компании. Памятка конструктора про трёхмерную сцену: `threejs/SKILL.md`.
+- `.grok/skills/threejs/references/llms-full.txt` — Не относится к сайту компании. Памятка конструктора про трёхмерную сцену: `threejs/references/llms-full.txt`.
+- `.grok/skills/video2dsprite/LICENSE` — Не относится к сайту компании. Памятка конструктора про спрайт из видео: `video2dsprite/LICENSE`.
+- `.grok/skills/video2dsprite/SKILL.md` — Не относится к сайту компании. Памятка конструктора про спрайт из видео: `video2dsprite/SKILL.md`.
+- `.grok/skills/video2dsprite/SOURCE.md` — Не относится к сайту компании. Памятка конструктора про спрайт из видео: `video2dsprite/SOURCE.md`.
+- `.grok/skills/video2dsprite/references/pipeline.md` — Не относится к сайту компании. Памятка конструктора про спрайт из видео: `video2dsprite/references/pipeline.md`.
+- `.grok/skills/video2dsprite/references/prompt-rules.md` — Не относится к сайту компании. Памятка конструктора про спрайт из видео: `video2dsprite/references/prompt-rules.md`.
+- `.grok/skills/video2dsprite/scripts/video2dsprite.py` — Не относится к сайту компании. Памятка конструктора про спрайт из видео: `video2dsprite/scripts/video2dsprite.py`.
+- `.grok/skills/xai-api/SKILL.md` — Не относится к сайту компании. Памятка конструктора про api xai: `xai-api/SKILL.md`.
+- `.grok/status` — Служебная пометка состояния конструктора Grok.
+- `.node_modules.lock` — Пустой замок каталога зависимостей. Сами пакеты лежат в node_modules и в Git не входят.
+- `.prettierrc` — Правила выравнивания кода для Prettier.
+- `.vercel/output/config.json` — Служебный файл результата сборки Vercel. Не править вручную.
+- `.vercel/output/functions/__server.func/.vc-config.json` — Собранный серверный файл оболочки Vercel. Страницы компании здесь не редактируют.
+- `.vercel/output/functions/__server.func/_chunks/renderer-template.mjs` — Собранный серверный файл оболочки Vercel. Страницы компании здесь не редактируют.
+- `.vercel/output/functions/__server.func/_libs/h3+rou3+srvx.mjs` — Собранный серверный файл оболочки Vercel. Страницы компании здесь не редактируют.
+- `.vercel/output/functions/__server.func/index.mjs` — Собранный серверный файл оболочки Vercel. Страницы компании здесь не редактируют.
+- `.vercel/output/nitro.json` — Служебный файл результата сборки Vercel. Не править вручную.
+- `.vercel/output/static/__grok/icon-180.png` — Копия внутри сборки Vercel. Не править. Источник — `__grok/icon-180.png`.
+- `.vercel/output/static/__grok/install/assets/homescreen/glass-puzzle.svg` — Копия внутри сборки Vercel. Не править. Источник — `__grok/install/assets/homescreen/glass-puzzle.svg`.
+- `.vercel/output/static/__grok/install/assets/homescreen/glass-share.svg` — Копия внутри сборки Vercel. Не править. Источник — `__grok/install/assets/homescreen/glass-share.svg`.
+- `.vercel/output/static/__grok/install/assets/homescreen/logo-grok.svg` — Копия внутри сборки Vercel. Не править. Источник — `__grok/install/assets/homescreen/logo-grok.svg`.
+- `.vercel/output/static/__grok/install/assets/homescreen/ob-ipad.png` — Копия внутри сборки Vercel. Не править. Источник — `__grok/install/assets/homescreen/ob-ipad.png`.
+- `.vercel/output/static/__grok/install/assets/homescreen/ob-phone.png` — Копия внутри сборки Vercel. Не править. Источник — `__grok/install/assets/homescreen/ob-phone.png`.
+- `.vercel/output/static/__grok/install/assets/homescreen/plus.svg` — Копия внутри сборки Vercel. Не править. Источник — `__grok/install/assets/homescreen/plus.svg`.
+- `.vercel/output/static/__grok/install/styles.css` — Копия внутри сборки Vercel. Не править. Источник — `__grok/install/styles.css`.
+- `.vercel/output/static/assets/index-Dr7tCRch.js` — Копия внутри сборки Vercel. Не править. Источник — `assets/index-Dr7tCRch.js`.
+- `.vercel/output/static/assets/routes-C8fDYVZj.js` — Копия внутри сборки Vercel. Не править. Источник — `assets/routes-C8fDYVZj.js`.
+- `.vercel/output/static/assets/styles-48lav73z.css` — Копия внутри сборки Vercel. Не править. Источник — `assets/styles-48lav73z.css`.
+- `.vercel/output/static/content/company.js` — Копия внутри сборки Vercel. Не править. Источник — `content/company.js`.
+- `.vercel/output/static/content/dokumenty.js` — Копия внутри сборки Vercel. Не править. Источник — `content/dokumenty.js`.
+- `.vercel/output/static/content/index.js` — Копия внутри сборки Vercel. Не править. Источник — `content/index.js`.
+- `.vercel/output/static/content/kontakty.js` — Копия внутри сборки Vercel. Не править. Источник — `content/kontakty.js`.
+- `.vercel/output/static/content/otrasli.js` — Копия внутри сборки Vercel. Не править. Источник — `content/otrasli.js`.
+- `.vercel/output/static/content/privacy.js` — Копия внутри сборки Vercel. Не править. Источник — `content/privacy.js`.
+- `.vercel/output/static/content/rayony-kotovsk.js` — Копия внутри сборки Vercel. Не править. Источник — `content/rayony-kotovsk.js`.
+- `.vercel/output/static/content/rayony-michurinsk.js` — Копия внутри сборки Vercel. Не править. Источник — `content/rayony-michurinsk.js`.
+- `.vercel/output/static/content/rayony-morshansk.js` — Копия внутри сборки Vercel. Не править. Источник — `content/rayony-morshansk.js`.
+- `.vercel/output/static/content/rayony-rasskazovo.js` — Копия внутри сборки Vercel. Не править. Источник — `content/rayony-rasskazovo.js`.
+- `.vercel/output/static/content/uslugi.js` — Копия внутри сборки Vercel. Не править. Источник — `content/uslugi.js`.
+- `.vercel/output/static/css/styles.css` — Копия внутри сборки Vercel. Не править. Источник — `css/styles.css`.
+- `.vercel/output/static/data/knowledge-base.js` — Копия внутри сборки Vercel. Не править. Источник — `data/knowledge-base.js`.
+- `.vercel/output/static/dokumenty.html` — Копия внутри сборки Vercel. Не править. Источник — `dokumenty.html`.
+- `.vercel/output/static/favicon.svg` — Копия внутри сборки Vercel. Не править. Источник — `favicon.svg`.
+- `.vercel/output/static/img/apple-touch.png` — Копия внутри сборки Vercel. Не править. Источник — `img/apple-touch.png`.
+- `.vercel/output/static/img/favicon-32.png` — Копия внутри сборки Vercel. Не править. Источник — `img/favicon-32.png`.
+- `.vercel/output/static/img/favicon.svg` — Копия внутри сборки Vercel. Не править. Источник — `img/favicon.svg`.
+- `.vercel/output/static/img/logo.png` — Копия внутри сборки Vercel. Не править. Источник — `img/logo.png`.
+- `.vercel/output/static/img/og-cover.jpg` — Копия внутри сборки Vercel. Не править. Источник — `img/og-cover.jpg`.
+- `.vercel/output/static/index.html` — Копия внутри сборки Vercel. Не править. Источник — `index.html`.
+- `.vercel/output/static/js/bot-consultant.js` — Копия внутри сборки Vercel. Не править. Источник — `js/bot-consultant.js`.
+- `.vercel/output/static/js/bot-kp.js` — Копия внутри сборки Vercel. Не править. Источник — `js/bot-kp.js`.
+- `.vercel/output/static/js/bots-ui.js` — Копия внутри сборки Vercel. Не править. Источник — `js/bots-ui.js`.
+- `.vercel/output/static/js/forms.js` — Копия внутри сборки Vercel. Не править. Источник — `js/forms.js`.
+- `.vercel/output/static/js/main.js` — Копия внутри сборки Vercel. Не править. Источник — `js/main.js`.
+- `.vercel/output/static/js/render-content.js` — Копия внутри сборки Vercel. Не править. Источник — `js/render-content.js`.
+- `.vercel/output/static/kontakty.html` — Копия внутри сборки Vercel. Не править. Источник — `kontakty.html`.
+- `.vercel/output/static/og.jpg` — Копия внутри сборки Vercel. Не править. Источник — `og.jpg`.
+- `.vercel/output/static/otrasli.html` — Копия внутри сборки Vercel. Не править. Источник — `otrasli.html`.
+- `.vercel/output/static/privacy.html` — Копия внутри сборки Vercel. Не править. Источник — `privacy.html`.
+- `.vercel/output/static/rayony/kotovsk.html` — Копия внутри сборки Vercel. Не править. Источник — `rayony/kotovsk.html`.
+- `.vercel/output/static/rayony/michurinsk.html` — Копия внутри сборки Vercel. Не править. Источник — `rayony/michurinsk.html`.
+- `.vercel/output/static/rayony/morshansk.html` — Копия внутри сборки Vercel. Не править. Источник — `rayony/morshansk.html`.
+- `.vercel/output/static/rayony/rasskazovo.html` — Копия внутри сборки Vercel. Не править. Источник — `rayony/rasskazovo.html`.
+- `.vercel/output/static/robots.txt` — Копия внутри сборки Vercel. Не править. Источник — `robots.txt`.
+- `.vercel/output/static/sitemap.xml` — Копия внутри сборки Vercel. Не править. Источник — `sitemap.xml`.
+- `.vercel/output/static/uslugi.html` — Копия внутри сборки Vercel. Не править. Источник — `uslugi.html`.
+- `AGENTS.md` — Правила для ИИ-редактора в этой песочнице. На посетителя сайта не влияет.
+- `artifacts/searched_images/49GUj.jpg` — Чужая картинка из поиска по документации форм. К дизайну сайта не относится, на страницах не стоит.
+- `artifacts/searched_images/AlCjN.jpg` — Чужая картинка из поиска по документации форм. К дизайну сайта не относится, на страницах не стоит.
+- `artifacts/searched_images/CzzJt.jpg` — Чужая картинка из поиска по документации форм. К дизайну сайта не относится, на страницах не стоит.
+- `artifacts/searched_images/NyTLn.jpg` — Чужая картинка из поиска по документации форм. К дизайну сайта не относится, на страницах не стоит.
+- `artifacts/searched_images/O6knu.jpg` — Чужая картинка из поиска по документации форм. К дизайну сайта не относится, на страницах не стоит.
+- `artifacts/searched_images/bALWT.jpg` — Чужая картинка из поиска по документации форм. К дизайну сайта не относится, на страницах не стоит.
+- `artifacts/searched_images/g1tiL.jpg` — Чужая картинка из поиска по документации форм. К дизайну сайта не относится, на страницах не стоит.
+- `artifacts/searched_images/n9Inp.jpg` — Чужая картинка из поиска по документации форм. К дизайну сайта не относится, на страницах не стоит.
+- `artifacts/searched_images/nSMzF.jpg` — Чужая картинка из поиска по документации форм. К дизайну сайта не относится, на страницах не стоит.
+- `artifacts/searched_images/tmdlt.jpg` — Чужая картинка из поиска по документации форм. К дизайну сайта не относится, на страницах не стоит.
+- `artifacts/searched_images/uIVUc.jpg` — Чужая картинка из поиска по документации форм. К дизайну сайта не относится, на страницах не стоит.
+- `artifacts/searched_images/vVnm0.jpg` — Чужая картинка из поиска по документации форм. К дизайну сайта не относится, на страницах не стоит.
+- `content/company.js` — Общие данные компании: название, телефоны, почта в подвале, адрес. Их подставляют скрипты в шапку и подвал.
+- `content/dokumenty.js` — Тексты страницы «Документы».
+- `content/index.js` — Тексты главной страницы.
+- `content/kontakty.js` — Тексты страницы «Контакты».
+- `content/otrasli.js` — Тексты страницы отраслей.
+- `content/privacy.js` — Текст политики конфиденциальности.
+- `content/rayony-kotovsk.js` — Тексты страницы района Котовск.
+- `content/rayony-michurinsk.js` — Тексты страницы района Мичуринск.
+- `content/rayony-morshansk.js` — Тексты страницы района Моршанск.
+- `content/rayony-rasskazovo.js` — Тексты страницы района Рассказово.
+- `content/uslugi.js` — Тексты страницы услуг.
+- `css/styles.css` — Весь внешний вид сайта: цвета, шрифты Roboto и Roboto Slab, сетка, меню, формы, боты.
+- `data/knowledge-base.js` — База ответов консультанта. Бот отвечает только отсюда и не выдумывает цены.
+- `dokumenty.html` — Страница «Документы».
+- `eslint.config.mjs` — Правила проверки кода ESLint.
+- `img/apple-touch.png` — Значок, когда сайт добавляют на экран телефона.
+- `img/favicon-32.png` — Маленький значок вкладки браузера, 32 пикселя.
+- `img/favicon.svg` — Векторный значок вкладки.
+- `img/logo.png` — Логотип компании. Это исходный файл, его не перерисовывают.
+- `img/og-cover.jpg` — Картинка для превью ссылки в соцсетях и мессенджерах.
+- `index.html` — Главная страница.
+- `js/bot-consultant.js` — Консультант: ищет ответ в базе знаний и не называет цены.
+- `js/bot-kp.js` — Бот запроса КП: 12 шагов, сводка, назад и отправка.
+- `js/bots-ui.js` — Окно «Написать нам»: вкладки консультанта и запроса КП, кнопка на телефоне.
+- `js/forms.js` — Отправка заявки. Здесь ключ Web3Forms и адрес, который написан под формой. Пароля от почты здесь нет.
+- `js/main.js` — Общее поведение страниц: меню, домен для ссылок SEO, счётчик Метрики только если вписан номер.
+- `js/render-content.js` — Подставляет тексты из content/*.js в элементы с data-field.
+- `kontakty.html` — Страница контактов.
+- `migrations/auth/0001_auth.sql` — Черновик таблиц входа оболочки Grok. Сайт компании им не пользуется.
+- `otrasli.html` — Страница отраслей.
+- `package-lock.json` — Точные версии всех установленных пакетов, чтобы сборка повторялась.
+- `package.json` — Имя служебного проекта, команды npm run dev и npm run build, список зависимостей.
+- `privacy.html` — Страница политики конфиденциальности.
+- `public/__grok/icon-180.png` — Копия для превью и сборки. Править нужно оригинал `__grok/icon-180.png`, эта копия перезаписывается.
+- `public/__grok/install/assets/homescreen/glass-puzzle.svg` — Копия для превью и сборки. Править нужно оригинал `__grok/install/assets/homescreen/glass-puzzle.svg`, эта копия перезаписывается.
+- `public/__grok/install/assets/homescreen/glass-share.svg` — Копия для превью и сборки. Править нужно оригинал `__grok/install/assets/homescreen/glass-share.svg`, эта копия перезаписывается.
+- `public/__grok/install/assets/homescreen/logo-grok.svg` — Копия для превью и сборки. Править нужно оригинал `__grok/install/assets/homescreen/logo-grok.svg`, эта копия перезаписывается.
+- `public/__grok/install/assets/homescreen/ob-ipad.png` — Копия для превью и сборки. Править нужно оригинал `__grok/install/assets/homescreen/ob-ipad.png`, эта копия перезаписывается.
+- `public/__grok/install/assets/homescreen/ob-phone.png` — Копия для превью и сборки. Править нужно оригинал `__grok/install/assets/homescreen/ob-phone.png`, эта копия перезаписывается.
+- `public/__grok/install/assets/homescreen/plus.svg` — Копия для превью и сборки. Править нужно оригинал `__grok/install/assets/homescreen/plus.svg`, эта копия перезаписывается.
+- `public/__grok/install/styles.css` — Копия для превью и сборки. Править нужно оригинал `__grok/install/styles.css`, эта копия перезаписывается.
+- `public/content/company.js` — Копия для превью и сборки. Править нужно оригинал `content/company.js`, эта копия перезаписывается.
+- `public/content/dokumenty.js` — Копия для превью и сборки. Править нужно оригинал `content/dokumenty.js`, эта копия перезаписывается.
+- `public/content/index.js` — Копия для превью и сборки. Править нужно оригинал `content/index.js`, эта копия перезаписывается.
+- `public/content/kontakty.js` — Копия для превью и сборки. Править нужно оригинал `content/kontakty.js`, эта копия перезаписывается.
+- `public/content/otrasli.js` — Копия для превью и сборки. Править нужно оригинал `content/otrasli.js`, эта копия перезаписывается.
+- `public/content/privacy.js` — Копия для превью и сборки. Править нужно оригинал `content/privacy.js`, эта копия перезаписывается.
+- `public/content/rayony-kotovsk.js` — Копия для превью и сборки. Править нужно оригинал `content/rayony-kotovsk.js`, эта копия перезаписывается.
+- `public/content/rayony-michurinsk.js` — Копия для превью и сборки. Править нужно оригинал `content/rayony-michurinsk.js`, эта копия перезаписывается.
+- `public/content/rayony-morshansk.js` — Копия для превью и сборки. Править нужно оригинал `content/rayony-morshansk.js`, эта копия перезаписывается.
+- `public/content/rayony-rasskazovo.js` — Копия для превью и сборки. Править нужно оригинал `content/rayony-rasskazovo.js`, эта копия перезаписывается.
+- `public/content/uslugi.js` — Копия для превью и сборки. Править нужно оригинал `content/uslugi.js`, эта копия перезаписывается.
+- `public/css/styles.css` — Копия для превью и сборки. Править нужно оригинал `css/styles.css`, эта копия перезаписывается.
+- `public/data/knowledge-base.js` — Копия для превью и сборки. Править нужно оригинал `data/knowledge-base.js`, эта копия перезаписывается.
+- `public/dokumenty.html` — Копия для превью и сборки. Править нужно оригинал `dokumenty.html`, эта копия перезаписывается.
+- `public/favicon.svg` — Копия для превью и сборки. Править нужно оригинал `favicon.svg`, эта копия перезаписывается.
+- `public/img/apple-touch.png` — Копия для превью и сборки. Править нужно оригинал `img/apple-touch.png`, эта копия перезаписывается.
+- `public/img/favicon-32.png` — Копия для превью и сборки. Править нужно оригинал `img/favicon-32.png`, эта копия перезаписывается.
+- `public/img/favicon.svg` — Копия для превью и сборки. Править нужно оригинал `img/favicon.svg`, эта копия перезаписывается.
+- `public/img/logo.png` — Копия для превью и сборки. Править нужно оригинал `img/logo.png`, эта копия перезаписывается.
+- `public/img/og-cover.jpg` — Копия для превью и сборки. Править нужно оригинал `img/og-cover.jpg`, эта копия перезаписывается.
+- `public/index.html` — Копия для превью и сборки. Править нужно оригинал `index.html`, эта копия перезаписывается.
+- `public/js/bot-consultant.js` — Копия для превью и сборки. Править нужно оригинал `js/bot-consultant.js`, эта копия перезаписывается.
+- `public/js/bot-kp.js` — Копия для превью и сборки. Править нужно оригинал `js/bot-kp.js`, эта копия перезаписывается.
+- `public/js/bots-ui.js` — Копия для превью и сборки. Править нужно оригинал `js/bots-ui.js`, эта копия перезаписывается.
+- `public/js/forms.js` — Копия для превью и сборки. Править нужно оригинал `js/forms.js`, эта копия перезаписывается.
+- `public/js/main.js` — Копия для превью и сборки. Править нужно оригинал `js/main.js`, эта копия перезаписывается.
+- `public/js/render-content.js` — Копия для превью и сборки. Править нужно оригинал `js/render-content.js`, эта копия перезаписывается.
+- `public/kontakty.html` — Копия для превью и сборки. Править нужно оригинал `kontakty.html`, эта копия перезаписывается.
+- `public/og.jpg` — Копия для превью и сборки. Править нужно оригинал `og.jpg`, эта копия перезаписывается.
+- `public/otrasli.html` — Копия для превью и сборки. Править нужно оригинал `otrasli.html`, эта копия перезаписывается.
+- `public/privacy.html` — Копия для превью и сборки. Править нужно оригинал `privacy.html`, эта копия перезаписывается.
+- `public/rayony/kotovsk.html` — Копия для превью и сборки. Править нужно оригинал `rayony/kotovsk.html`, эта копия перезаписывается.
+- `public/rayony/michurinsk.html` — Копия для превью и сборки. Править нужно оригинал `rayony/michurinsk.html`, эта копия перезаписывается.
+- `public/rayony/morshansk.html` — Копия для превью и сборки. Править нужно оригинал `rayony/morshansk.html`, эта копия перезаписывается.
+- `public/rayony/rasskazovo.html` — Копия для превью и сборки. Править нужно оригинал `rayony/rasskazovo.html`, эта копия перезаписывается.
+- `public/robots.txt` — Копия для превью и сборки. Править нужно оригинал `robots.txt`, эта копия перезаписывается.
+- `public/sitemap.xml` — Копия для превью и сборки. Править нужно оригинал `sitemap.xml`, эта копия перезаписывается.
+- `public/uslugi.html` — Копия для превью и сборки. Править нужно оригинал `uslugi.html`, эта копия перезаписывается.
+- `rayony/kotovsk.html` — Страница работ по Котовску.
+- `rayony/michurinsk.html` — Страница работ по Мичуринску.
+- `rayony/morshansk.html` — Страница работ по Моршанску.
+- `rayony/rasskazovo.html` — Страница работ по Рассказово.
+- `robots.txt` — Правила для поисковых роботов. Строка Sitemap пока закомментирована, пока нет боевого домена.
+- `screenshots/.gitkeep` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `.gitkeep`.
+- `screenshots/brand.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `brand.png`.
+- `screenshots/hero.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `hero.png`.
+- `screenshots/home-mobile.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `home-mobile.png`.
+- `screenshots/home.json` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `home.json`.
+- `screenshots/home.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `home.png`.
+- `screenshots/prod-mobile.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `prod-mobile.png`.
+- `screenshots/prod.json` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `prod.json`.
+- `screenshots/prod.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `prod.png`.
+- `screenshots/qa-1280-form.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-1280-form.png`.
+- `screenshots/qa-1280-top.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-1280-top.png`.
+- `screenshots/qa-320-dock.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-320-dock.png`.
+- `screenshots/qa-320-dock2.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-320-dock2.png`.
+- `screenshots/qa-320-form.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-320-form.png`.
+- `screenshots/qa-320-menu.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-320-menu.png`.
+- `screenshots/qa-320-menu2.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-320-menu2.png`.
+- `screenshots/qa-320-submit.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-320-submit.png`.
+- `screenshots/qa-320-top.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-320-top.png`.
+- `screenshots/qa-320-uslugi.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-320-uslugi.png`.
+- `screenshots/qa-360-dock2.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-360-dock2.png`.
+- `screenshots/qa-360-form.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-360-form.png`.
+- `screenshots/qa-360-menu2.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-360-menu2.png`.
+- `screenshots/qa-360-top.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-360-top.png`.
+- `screenshots/qa-768-form.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-768-form.png`.
+- `screenshots/qa-768-top.png` — Снимок экрана для проверки вёрстки, посетителям не показывается. Файл `qa-768-top.png`.
+- `scripts/app-env-plugin.mjs` — Плагин сборки: подставляет служебные переменные окружения.
+- `scripts/brand-check.mjs` — Проверка, что цвета и шрифты не уехали от бренд-токенов.
+- `scripts/brand-check.test.mjs` — Тест проверки бренда.
+- `scripts/browser-guard.mjs` — Ограничения для автоматической проверки в браузере.
+- `scripts/browser-smoke-verdict.mjs` — Разбор результата короткой браузерной проверки.
+- `scripts/browser-smoke-verdict.test.mjs` — Тест разбора браузерной проверки.
+- `scripts/browser-smoke.mjs` — Короткий прогон сайта в браузере.
+- `scripts/bvs-static-plugin.mjs` — Отдаёт HTML, CSS и JS компании из корня и копирует их в public при сборке.
+- `scripts/check-auth-invariant.mjs` — Проверка, что вход оболочки не включился случайно.
+- `scripts/check-auth-invariant.test.mjs` — Тест этой проверки.
+- `scripts/gen-bvs-pages.mjs` — Генератор страниц. Сейчас страницы уже лежат в корне; скрипт нужен, чтобы не потерять шаблон.
+- `scripts/grok-pwa-plugin.mjs` — Плагин иконки «на экран домой» для превью Grok.
+- `scripts/grok-pwa-plugin.test.mjs` — Тест этого плагина.
+- `scripts/grok-pwa-shared.d.mts` — Типы для плагина иконки.
+- `scripts/grok-pwa-shared.mjs` — Общие функции плагина иконки.
+- `scripts/install-page.html` — Служебная страница установки превью, не страница компании.
+- `scripts/migrate.mjs` — Запуск миграций оболочки. Для страниц компании ничего не пишет.
+- `scripts/migration-plan.mjs` — План, какие миграции запускать.
+- `scripts/migration-plan.test.mjs` — Тест плана миграций.
+- `scripts/preview-thumbnail.mjs` — Картинка превью проекта в конструкторе.
+- `scripts/preview.mjs` — Перезапуск и остановка превью.
+- `scripts/preview.test.mjs` — Тест команд превью.
+- `scripts/sign-out-plan.mjs` — План выхода из оболочки. На сайте компании входа нет.
+- `scripts/sign-out-plan.test.mjs` — Тест плана выхода.
+- `scripts/with-app-env.mjs` — Запускает Vite с переменными из .grok/app-env.json.
+- `scripts/with-app-env.test.mjs` — Тест запуска с переменными.
+- `scripts/write-atomic.mjs` — Запись файла целиком, чтобы не оставить обрезанный файл.
+- `scripts/write-atomic.test.mjs` — Тест такой записи.
+- `server/middleware/grok-pwa.ts` — Промежуточный слой иконки превью. Страницы компании его не показывают.
+- `server/virtual-grok-og-identity.d.ts` — Типы служебной карточки превью.
+- `sitemap.xml` — Карта страниц для поиска. Домен ещё плейсхолдер, настоящий адрес сюда не подставлен.
+- `src/components/preview-host-bridge.tsx` — Мост между превью Grok и страницей. Не содержимое сайта компании.
+- `src/lib/app-data/app-data.test.ts` — Служебный код оболочки про готовность данных. Страницы компании и заявки КП его не вызывают. Файл `app-data.test.ts`.
+- `src/lib/app-data/client.server.ts` — Служебный код оболочки про готовность данных. Страницы компании и заявки КП его не вызывают. Файл `client.server.ts`.
+- `src/lib/app-data/errors.ts` — Служебный код оболочки про готовность данных. Страницы компании и заявки КП его не вызывают. Файл `errors.ts`.
+- `src/lib/app-data/index.ts` — Служебный код оболочки про готовность данных. Страницы компании и заявки КП его не вызывают. Файл `index.ts`.
+- `src/lib/app-data/login.ts` — Служебный код оболочки про готовность данных. Страницы компании и заявки КП его не вызывают. Файл `login.ts`.
+- `src/lib/app-data/readiness-schedule.test.ts` — Служебный код оболочки про готовность данных. Страницы компании и заявки КП его не вызывают. Файл `readiness-schedule.test.ts`.
+- `src/lib/app-data/readiness-schedule.ts` — Служебный код оболочки про готовность данных. Страницы компании и заявки КП его не вызывают. Файл `readiness-schedule.ts`.
+- `src/lib/app-data/readiness.ts` — Служебный код оболочки про готовность данных. Страницы компании и заявки КП его не вызывают. Файл `readiness.ts`.
+- `src/lib/app-data/server-only.ts` — Служебный код оболочки про готовность данных. Страницы компании и заявки КП его не вызывают. Файл `server-only.ts`.
+- `src/lib/app-data/types.ts` — Служебный код оболочки про готовность данных. Страницы компании и заявки КП его не вызывают. Файл `types.ts`.
+- `src/lib/app-data/use-connector-readiness.ts` — Служебный код оболочки про готовность данных. Страницы компании и заявки КП его не вызывают. Файл `use-connector-readiness.ts`.
+- `src/lib/auth/client.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `client.ts`.
+- `src/lib/auth/email-password.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `email-password.ts`.
+- `src/lib/auth/gate-identity.server.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `gate-identity.server.ts`.
+- `src/lib/auth/gate-identity.test.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `gate-identity.test.ts`.
+- `src/lib/auth/gate-session-marker.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `gate-session-marker.ts`.
+- `src/lib/auth/gate-session.server.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `gate-session.server.ts`.
+- `src/lib/auth/gates.tsx` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `gates.tsx`.
+- `src/lib/auth/isolation.server.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `isolation.server.ts`.
+- `src/lib/auth/middleware.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `middleware.ts`.
+- `src/lib/auth/pglite-dialect.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `pglite-dialect.ts`.
+- `src/lib/auth/popup.server.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `popup.server.ts`.
+- `src/lib/auth/preview.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `preview.ts`.
+- `src/lib/auth/provider.tsx` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `provider.tsx`.
+- `src/lib/auth/providers.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `providers.ts`.
+- `src/lib/auth/server.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `server.ts`.
+- `src/lib/auth/sign-in-gate.test.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `sign-in-gate.test.ts`.
+- `src/lib/auth/sign-in-gate.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `sign-in-gate.ts`.
+- `src/lib/auth/use-current-user.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `use-current-user.ts`.
+- `src/lib/auth/verify.server.ts` — Служебный код входа оболочки Grok. На сайте компании входа нет, заявки через него не ходят. Файл `verify.server.ts`.
+- `src/lib/db.ts` — Подключение к служебной базе оболочки. Заявки КП туда не пишутся.
+- `src/lib/env.server.ts` — Чтение служебных переменных на сервере оболочки.
+- `src/lib/error-component.tsx` — Экран ошибки оболочки.
+- `src/lib/multiplayer/index.ts` — Заготовка сетевой игры оболочки. Сайт компании это не использует.
+- `src/lib/multiplayer/p2p.ts` — Заготовка прямой связи между браузерами. Сайт компании это не использует.
+- `src/lib/og/site.json` — Служебные данные карточки превью.
+- `src/lib/preview-embedder-origin.ts` — Откуда разрешено встраивать превью.
+- `src/lib/preview-host-bridge.ts` — Связь превью с окном конструктора.
+- `src/lib/preview-path-prefix.test.ts` — Тест префикса адреса превью.
+- `src/lib/preview-path-prefix.ts` — Префикс адреса, если превью открыто не в корне домена.
+- `src/routeTree.gen.ts` — Сгенерированное дерево маршрутов оболочки.
+- `src/router.tsx` — Маршрутизатор оболочки.
+- `src/routes/__root.tsx` — Общая оболочка единственного служебного маршрута.
+- `src/routes/index.tsx` — Служебная страница оболочки. Сам сайт компании — это index.html в корне, не этот файл.
+- `src/styles.css` — Стили оболочки. Внешний вид компании задаёт css/styles.css.
+- `startup.sh` — Команда, которой песочница поднимает сайт для превью.
+- `tsconfig.json` — Настройки TypeScript для оболочки вокруг сайта.
+- `uslugi.html` — Страница услуг.
+- `vercel.json` — Короткая настройка выкладки на Vercel.
+- `vite.config.ts` — Сборка: Vite отдаёт статические HTML раньше оболочки и копирует их в public.
+- `ИНСТРУКЦИЯ.md` — Инструкция редактору: что можно менять, куда писать телефон, ключ формы, Метрику и домен.

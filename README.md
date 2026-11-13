@@ -27,6 +27,7 @@ npm run dev
 | Заявка КП и ключ формы | `js/forms.js` |
 | Шаги бота КП | `js/bot-kp.js` |
 | Внешний вид | `css/styles.css` |
+| Страницы услуг P1 | `uslugi/*.html`, плюс `tehnika.html` и `obekty.html` |
 | Логотип | `img/logo.png` |
 
 `public/` и `.vercel/output/static/` — копии. Их не редактируют: сборка перезаписывает их из корня.
