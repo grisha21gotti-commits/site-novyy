@@ -78,7 +78,7 @@
     </nav>
     <div class="header-contacts">
       <a class="header-phone" data-company="phoneMain" data-company-href="phoneMainHref" href="tel:+74752454917">+7 (4752) 45-49-17</a>
-      <a class="btn btn-primary" href="#kp">Запросить КП</a>
+      <a class="btn btn-primary" href="#kp">Отправить ТЗ и запросить КП</a>
     </div>
   </div>
   <div class="addr-bar">
@@ -104,7 +104,7 @@
         <li data-field="badge3">Член СРО, договор подряда, в том числе для конкурентных процедур</li>
       </ul>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#kp">Запросить коммерческое предложение</a>
+        <a class="btn btn-primary" href="#kp">Отправить ТЗ и запросить КП</a>
         <a class="btn btn-ghost" href="uslugi.html">Посмотреть состав работ</a>
         <a class="hero-phone" href="tel:+74752454917">+7 (4752) 45-49-17</a>
       </div>
@@ -285,10 +285,10 @@
   <div class="container split">
     <div>
       <!-- РЕДАКТИРОВАТЬ: поле kpTitle из content/index.js -->
-<h2 data-field="kpTitle">Запрос коммерческого предложения</h2>
+<h2 data-field="kpTitle">Отправить ТЗ и запросить КП</h2>
       <!-- РЕДАКТИРОВАТЬ: поле kpLead из content/index.js -->
 <p data-field="kpLead">Опишите задачу организации. Подготовим коммерческое предложение. Цену на сайте не показываем и заранее в письме не называем.</p>
-      <div class="form-card"><form class="kp-form js-kp-form" action="mailto:ggbolfghjab@yandex.ru" method="post" enctype="text/plain" novalidate>
+      <div class="form-card"><form class="kp-form js-kp-form" action="mailto:bvs_tam@mail.ru" method="post" enctype="text/plain" novalidate>
     <div class="form-grid two">
       <label>Организация *
         <input name="org" required autocomplete="organization" maxlength="200">
@@ -302,8 +302,8 @@
         <input name="contact" required autocomplete="name" maxlength="120">
         <span class="field-error" data-error-for="contact"></span>
       </label>
-      <label>Телефон *
-        <input name="phone" required autocomplete="tel" placeholder="+7 (___) ___-__-__" inputmode="tel">
+      <label>Телефон
+        <input name="phone" autocomplete="tel" placeholder="+7 (___) ___-__-__" inputmode="tel">
         <span class="field-error" data-error-for="phone"></span>
       </label>
       <label>Email
@@ -352,10 +352,10 @@
       </label>
       <span class="field-error" data-error-for="consent"></span>
       <div class="actions">
-        <button class="btn btn-primary" type="submit">Запросить коммерческое предложение</button>
-        <button class="btn btn-ghost js-open-kp" type="button">Заполнить заявку с помощью бота</button>
+        <button class="btn btn-primary" type="submit">Отправить ТЗ и запросить КП</button>
+        <!-- P3: кнопка бота скрыта. <button class="btn btn-ghost js-open-kp" type="button">Заполнить заявку с помощью бота</button> -->
       </div>
-      <p class="fine">Заявка уходит письмом на ggbolfghjab@yandex.ru через сервис Web3Forms. На сервере сайта она не хранится. WhatsApp: [ЗАПОЛНИТЬ: номер WhatsApp в формате 7XXXXXXXXXX]. Telegram: [ЗАПОЛНИТЬ: аккаунт или номер Telegram]. Калькулятора и цены за метр нет.</p>
+      <p class="fine">Заявка уходит письмом через сервис Web3Forms. Адрес приёма на сайте не показывается. На сервере сайта она не хранится. WhatsApp: [ЗАПОЛНИТЬ: номер WhatsApp в формате 7XXXXXXXXXX]. Telegram: [ЗАПОЛНИТЬ: аккаунт или номер Telegram]. Калькулятора и цены за метр нет.</p>
       <div class="form-status" data-form-status hidden></div>
       <label data-form-copy-wrap hidden>Текст заявки
         <textarea data-form-copy readonly></textarea>
@@ -426,9 +426,11 @@
 <script src="data/knowledge-base.js"></script>
 <script src="js/render-content.js"></script>
 <script src="js/forms.js"></script>
+<!-- P3: боты отключены до отдельного решения. Код сохранён.
 <script src="js/bot-consultant.js"></script>
 <script src="js/bot-kp.js"></script>
 <script src="js/bots-ui.js"></script>
+-->
 <script src="js/main.js"></script>
 </body>
 </html>

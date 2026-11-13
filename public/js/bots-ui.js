@@ -1,5 +1,9 @@
-/* Плавающая панель: вкладки «Консультант» и «Запрос КП». */
+/* Плавающая панель: вкладки «Консультант» и «Запрос КП».
+   P3: выключено, пока заказчик отдельно не включит.
+   Код оставлен. Чтобы показать ботов, поставьте window.BVS_BOTS_ENABLED = true
+   до загрузки этого файла и раскомментируйте script-теги на страницах. */
 (function () {
+  if (window.BVS_BOTS_ENABLED !== true) return;
   var consultant = window.BVS_CONSULTANT;
   if (!consultant || !window.BVS_KP) return;
 
