@@ -162,8 +162,6 @@ function formBlock(prefill, asset) {
 
 function header(asset, current) {
   const cur = (id) => (current === id ? ' aria-current="page"' : "");
-  const districts = ["michurinsk", "rasskazovo", "morshansk", "kotovsk"];
-  const dropCurrent = districts.includes(current) ? ' aria-current="page"' : "";
   return `<a class="skip" href="#main">К содержанию</a>
 <header class="site-header">
   <div class="container header-bar">
@@ -179,15 +177,6 @@ function header(asset, current) {
       <a href="${asset}uslugi.html"${cur("uslugi")}>Услуги</a>
       <a href="${asset}otrasli.html"${cur("otrasli")}>Отрасли</a>
       <a href="${asset}dokumenty.html"${cur("dokumenty")}>Документы</a>
-      <div class="nav-drop" data-drop>
-        <button type="button" class="nav-drop-btn" data-drop-btn aria-expanded="false"${dropCurrent}>Районы</button>
-        <div class="nav-drop-panel">
-          <a href="${asset}rayony/michurinsk.html"${cur("michurinsk")}>Мичуринск</a>
-          <a href="${asset}rayony/rasskazovo.html"${cur("rasskazovo")}>Рассказово</a>
-          <a href="${asset}rayony/morshansk.html"${cur("morshansk")}>Моршанск</a>
-          <a href="${asset}rayony/kotovsk.html"${cur("kotovsk")}>Котовск</a>
-        </div>
-      </div>
       <a href="${asset}kontakty.html"${cur("kontakty")}>Контакты</a>
     </nav>
     <div class="header-contacts">
@@ -448,12 +437,6 @@ function buildHome() {
   <div class="container">
     ${T(bag, file, "geoTitle", "География", "h2", "")}
     ${T(bag, file, "geoLead", "Работаем по Тамбову и Тамбовской области.", "p", "")}
-    <div class="chips">
-      <a class="chip" href="rayony/michurinsk.html">Мичуринск</a>
-      <a class="chip" href="rayony/rasskazovo.html">Рассказово</a>
-      <a class="chip" href="rayony/morshansk.html">Моршанск</a>
-      <a class="chip" href="rayony/kotovsk.html">Котовск</a>
-    </div>
     ${T(bag, file, "geoNote", "Если вашего района нет в списке — всё равно отправьте заявку, выезжаем по области к хозяйствам и предприятиям.", "p", "")}
   </div>
 </section>
