@@ -31,6 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<!-- schema.org: адрес буква в букву из content/company.js — 392018, г. Тамбов, Заводской пер., д. 20. Поля: postalCode 392018, addressLocality Тамбов, streetAddress «Заводской пер., д. 20», addressCountry RU. -->
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -105,22 +106,23 @@
   <section class="section"><div class="container split">
     <div class="req-card">
       <h2>Телефоны и почта</h2>
-      <p>Основной: <a href="tel:+74752454917">+7 (4752) 45-49-17</a></p>
-      <p>Дополнительный: <a href="tel:+74752455995">+7 (4752) 45-59-95</a></p>
-      <p>[ПОДТВЕРДИТЬ: какие телефоны показывать как основные]</p>
-      <p>Мобильный: [ЗАПОЛНИТЬ: мобильный телефон, если есть]</p>
+      <p>Основной: <a data-company="phoneMain" data-company-href="phoneMainHref" href="tel:+74752454917">+7 (4752) 45-49-17</a></p>
+      <p>Дополнительный: <a data-company="phoneAlt" data-company-href="phoneAltHref" href="tel:+74752455995">+7 (4752) 45-59-95</a></p>
+      <!-- [ПОДТВЕРДИТЬ: какие телефоны показывать как основные] -->
+      <!-- [ЗАПОЛНИТЬ: мобильный телефон, если есть] -->
       <p>Email: <a href="mailto:bvs_tam@mail.ru">bvs_tam@mail.ru</a></p>
       <p>Режим: пн–пт 08:00–17:00, сб–вс выходной.</p>
-      <p>WhatsApp: [ЗАПОЛНИТЬ: номер WhatsApp в формате 7XXXXXXXXXX]<br>Telegram: [ЗАПОЛНИТЬ: аккаунт или номер Telegram]</p>
+      <!-- [ЗАПОЛНИТЬ: номер WhatsApp в формате 7XXXXXXXXXX] -->
+      <!-- [ЗАПОЛНИТЬ: аккаунт или номер Telegram] -->
       <h2>Адрес</h2>
-      <p><strong>392018, г. Тамбов, Заводской пер., д. 20</strong></p>
+      <p><strong data-company="address">392018, г. Тамбов, Заводской пер., д. 20</strong></p>
       <h2>Реквизиты</h2>
       <p>ООО «БУРВОДСТРОЙ», ИНН 6829140201, КПП 682901001, ОГРН 1186820001543, ОКПО 25309655. Директор: Батищев Михаил Вячеславович.</p>
       <p>Лицензия на пользование недрами № ТМБ 80356 ВЭ, срок до 25.06.2028. СРО № 60, <a href="https://stroytambov.ru/reestr/view?id=10">реестр</a>.</p>
       <p>Прежние сайты: <a href="http://bvs68.ru">bvs68.ru</a>, <a href="http://бурводстрой68.рф">бурводстрой68.рф</a>. Новый сайт их заменяет. Сейчас они часто открываются без нормального HTTPS или недоступны.</p>
     </div>
     <div>
-      <iframe class="map-frame" title="Карта: Тамбов, Заводской пер., 20" width="600" height="400" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://yandex.ru/map-widget/v1/?text=%D0%A2%D0%B0%D0%BC%D0%B1%D0%BE%D0%B2%2C%20%D0%97%D0%B0%D0%B2%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9%20%D0%BF%D0%B5%D1%80.%2C%2020&z=16"></iframe>
+      <iframe class="map-frame" data-map title="Карта: 392018, г. Тамбов, Заводской пер., д. 20" width="600" height="400" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://yandex.ru/map-widget/v1/?text=392018%2C%20%D0%B3.%20%D0%A2%D0%B0%D0%BC%D0%B1%D0%BE%D0%B2%2C%20%D0%97%D0%B0%D0%B2%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9%20%D0%BF%D0%B5%D1%80.%2C%20%D0%B4.%2020&z=16"></iframe>
     </div>
   </div></section>
   <section class="section section-muted" id="kp"><div class="container">
@@ -308,11 +310,13 @@
       <p><a data-company="phoneAlt" data-company-href="phoneAltHref" href="tel:+74752455995">+7 (4752) 45-59-95</a><br>дополнительный</p>
       <p><a data-company="email" data-company-href="emailHref" href="mailto:bvs_tam@mail.ru">bvs_tam@mail.ru</a></p>
       <p>Режим: <span data-company="hours">пн–пт 08:00–17:00, сб–вс выходной</span></p>
-      <p class="fine">[ПОДТВЕРДИТЬ: какие телефоны показывать как основные] Мобильный: [ЗАПОЛНИТЬ: мобильный телефон, если есть]</p>
+      <!-- [ПОДТВЕРДИТЬ: какие телефоны показывать как основные] -->
+      <!-- [ЗАПОЛНИТЬ: мобильный телефон, если есть] -->
     </div>
   </div>
   <div class="container"><p class="fine">Гидрогеология • проект • лицензия • ВЗУ • ЗСО • паспорт скважины</p></div>
-  <div class="footer-copy"><div class="container"><p>© 2026 ООО «БУРВОДСТРОЙ». [ПОДТВЕРДИТЬ: использовать ли архивный favicon со старого сайта или оставить знак «БВ»]</p></div></div>
+  <div class="footer-copy"><div class="container"><p>© 2026 ООО «БУРВОДСТРОЙ».</p>
+<!-- [ПОДТВЕРДИТЬ: использовать ли архивный favicon со старого сайта или оставить знак «БВ»] --></div></div>
 </footer>
 <script src="content/company.js"></script>
 <script src="content/kontakty.js"></script>

@@ -65,9 +65,18 @@
     return { ok: true, id: best.entry.id, text: best.entry.answer };
   }
 
-  /* Точка для будущего перефраза. Сейчас всегда возвращает ответ базы как есть. */
+  /* Убирает предложения с пометками. Адрес берётся из COMPANY, не из своей строки. */
   function deliver(found) {
-    return found.text;
+    var text = String(found.text || "");
+    var addr = window.COMPANY && window.COMPANY.address ? window.COMPANY.address : "";
+    text = text.replace(/\{\{COMPANY\.address\}\}/g, addr);
+    return text
+      .split(/(?<=[.!?])\s+/)
+      .filter(function (sentence) {
+        return !/\[(ЗАПОЛНИТЬ|ПОДТВЕРДИТЬ):[^\]]+\]/.test(sentence);
+      })
+      .join(" ")
+      .trim();
   }
 
   window.BVS_CONSULTANT = {
