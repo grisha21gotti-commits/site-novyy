@@ -685,6 +685,7 @@ textarea { min-height: 120px; resize: vertical; }
   .hero-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); align-items: center; }
   .cards-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .cards-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cards-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .steps-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .step::before { display: none; }
 }
