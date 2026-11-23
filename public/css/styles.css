@@ -269,6 +269,11 @@ p { margin: 0 0 14px; }
 
 .addr-bar strong { font-weight: 700; color: var(--heading); }
 .addr-note { color: var(--text); }
+.addr-note:empty { display: none; }
+
+@media (max-width: 768px) {
+  .addr-bar { display: none; }
+}
 
 .hero { background: var(--bg-muted-2); padding: 36px 0 48px; }
 .hero-grid {
