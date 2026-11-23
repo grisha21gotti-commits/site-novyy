@@ -228,6 +228,7 @@
 <p data-field="geoLead">Работаем в радиусе 400 км от Тамбова.</p>
     <!-- РЕДАКТИРОВАТЬ: поле geoNote из content/index.js -->
 <p data-field="geoNote">Мичуринск, Рассказово, Моршанск и Котовск тоже в этом радиусе. Если вашего города нет в списке, заявку всё равно можно отправить.</p>
+    <div id="geo-map" class="map-frame" role="region" aria-label="Карта: радиус 400 км от Тамбова"></div>
   </div>
 </section>
 <section class="section section-muted">
@@ -481,6 +482,35 @@
   <div class="footer-copy"><div class="container"><p>© 2026 ООО «БУРВОДСТРОЙ».</p>
 <!-- [ПОДТВЕРДИТЬ: использовать ли архивный favicon со старого сайта или оставить знак «БВ»] --></div></div>
 </footer>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+<script>
+(function () {
+  function draw() {
+    if (!window.ymaps || !document.getElementById("geo-map")) return;
+    ymaps.ready(function () {
+      var center = [52.721219, 41.452274];
+      var map = new ymaps.Map("geo-map", {
+        center: center,
+        zoom: 6,
+        controls: ["zoomControl"]
+      });
+      map.behaviors.disable("scrollZoom");
+      var circle = new ymaps.Circle([center, 400000], {
+        hintContent: "Радиус 400 км от Тамбова"
+      }, {
+        fillColor: "rgba(0, 96, 174, 0.18)",
+        strokeColor: "#0060AE",
+        strokeWidth: 2
+      });
+      map.geoObjects.add(circle);
+      map.geoObjects.add(new ymaps.Placemark(center, { hintContent: "Тамбов" }));
+      map.setBounds(circle.geometry.getBounds(), { checkZoomRange: true, zoomMargin: 24 });
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", draw);
+  else draw();
+})();
+</script>
 <script src="content/company.js"></script>
 <script src="content/index.js"></script>
 <script src="data/knowledge-base.js"></script>

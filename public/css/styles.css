@@ -501,6 +501,10 @@ textarea { min-height: 120px; resize: vertical; }
   border-radius: var(--radius);
   background: var(--bg-muted);
 }
+#geo-map { height: 420px; margin-top: 16px; }
+@media (max-width: 768px) {
+  #geo-map { height: 300px; }
+}
 
 .faq details {
   background: #fff;
