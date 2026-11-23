@@ -18,6 +18,8 @@ window.COMPANY = {
   phoneMainHref: "tel:+74752454917",
   phoneAlt: "+7 (4752) 45-59-95",
   phoneAltHref: "tel:+74752455995",
+  phoneMobile: "+7 (905) 120-95-55",
+  phoneMobileHref: "tel:+79051209555",
   email: "bvs_tam@mail.ru",
   emailHref: "mailto:bvs_tam@mail.ru",
   hours: "пн–пт 08:00–17:00, сб–вс выходной",
